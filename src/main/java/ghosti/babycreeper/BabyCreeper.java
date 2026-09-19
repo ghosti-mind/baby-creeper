@@ -1,16 +1,23 @@
 package ghosti.babycreeper;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.core.Registry;
 
 import org.slf4j.Logger;
@@ -66,10 +73,22 @@ public class BabyCreeper implements ModInitializer {
         );
 		LOGGER.info("Baby Creeper Entity class Registered with default attributes.");
 
-		// Add Spawn Egg to Creative Inventory Tab
-		// ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
-        // 	entries.add(BABY_CREEPER_SPAWN_EGG);
-    	// });
+		// Add Spawning to Biomes
+		BiomeModifications.addSpawn(
+            BiomeSelectors.foundInOverworld(), // Targets all Overworld biomes
+            MobCategory.MONSTER,               // Category (handles mob caps)
+            BABY_CREEPER,                      // Your EntityType
+            100,                                // Weight (Vanilla Creeper is 100)
+            1,                                 // Minimum pack count
+            4                                  // Maximum pack count
+        );
+
+        SpawnPlacements.register(
+            BABY_CREEPER,
+            SpawnPlacementTypes.ON_GROUND,
+            Heightmap.Types.MOTION_BLOCKING,
+			Monster::checkMonsterSpawnRules
+        );
 
 	}
 

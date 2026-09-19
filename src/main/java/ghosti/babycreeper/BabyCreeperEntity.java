@@ -1,9 +1,18 @@
 package ghosti.babycreeper;
 
+import com.llamalad7.mixinextras.lib.apache.commons.ObjectUtils.Null;
+
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 
 public class BabyCreeperEntity extends Creeper {
     // hooks for drawing synchronization
