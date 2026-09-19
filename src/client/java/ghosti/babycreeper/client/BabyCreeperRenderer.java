@@ -24,4 +24,15 @@ public class BabyCreeperRenderer extends MobRenderer<BabyCreeperEntity, BabyCree
     public BabyCreeperRenderState createRenderState() {
         return new BabyCreeperRenderState();
     }
+
+    @Override
+    public void extractRenderState(BabyCreeperEntity entity, BabyCreeperRenderState state, float partialTick) {
+        super.extractRenderState(entity, state, partialTick);
+
+        // HERE IS THE BRIDGE: Copy animation states from Entity -> RenderState
+        state.idle.copyFrom(entity.idle);
+        state.walk.copyFrom(entity.walk);
+        state.attack.copyFrom(entity.attack);
+        state.death.copyFrom(entity.death);
+    }
 }
