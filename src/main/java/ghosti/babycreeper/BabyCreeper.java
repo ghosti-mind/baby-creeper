@@ -30,7 +30,6 @@ public class BabyCreeper implements ModInitializer {
 	public static final ResourceKey<EntityType<?>> BABY_CREEPER_KEY = ResourceKey.create(Registries.ENTITY_TYPE, BABY_CREEPER_ID);
 
 
-
     public static final EntityType<BabyCreeperEntity> BABY_CREEPER = Registry.register(
         BuiltInRegistries.ENTITY_TYPE,
 		BABY_CREEPER_ID,
@@ -71,7 +70,7 @@ public class BabyCreeper implements ModInitializer {
 		// ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(entries -> {
         // 	entries.add(BABY_CREEPER_SPAWN_EGG);
     	// });
-		
+
 	}
 
 	public static Identifier id(String path) {
